@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagramredesign/Data/Posts.dart';
+import 'package:instagramredesign/Screens/ProfileScreen.dart';
 
 class PostContainer extends StatefulWidget {
   final Post post;
@@ -21,23 +22,31 @@ class _PostContainerState extends State<PostContainer> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 15,
-                  backgroundImage: AssetImage(widget.post.imgUrl),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  widget.post.userName,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    foreground: Paint()..shader = linearGradient,
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ProfileScreen(
+                          post: widget.post,
+                        )));
+              },
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 15,
+                    backgroundImage: AssetImage(widget.post.imgUrl),
                   ),
-                )
-              ],
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    widget.post.userName,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      foreground: Paint()..shader = linearGradient,
+                    ),
+                  )
+                ],
+              ),
             ),
             Icon(
               Icons.more_horiz,
